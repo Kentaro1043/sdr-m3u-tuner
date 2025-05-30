@@ -7,7 +7,7 @@ from pathlib import Path
 from flask import Flask, Response, send_file
 from loguru import logger
 
-from gnuradio.fm_reception import fm_reception
+from gr.fm_reception import fm_reception
 
 app = Flask(__name__)
 
