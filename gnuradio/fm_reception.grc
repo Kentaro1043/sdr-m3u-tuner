@@ -116,7 +116,7 @@ blocks:
     bits_per_sample3: FORMAT_VORBIS
     bits_per_sample4: FORMAT_PCM_16
     comment: ''
-    file: ../tmp/sound.wav
+    file: ./tmp/sound.wav
     format: FORMAT_WAV
     nchan: '2'
     samp_rate: samp_rate
@@ -133,7 +133,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: ../tmp/test.wav
+    file: ./tmp/test.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '2'

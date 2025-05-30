@@ -38,9 +38,9 @@ class fm_reception(gr.top_block):
         # Blocks
         ##################################################
 
-        self.blocks_wavfile_source_0 = blocks.wavfile_source('../tmp/test.wav', True)
+        self.blocks_wavfile_source_0 = blocks.wavfile_source('./tmp/test.wav', True)
         self.blocks_wavfile_sink_0 = blocks.wavfile_sink(
-            '../tmp/sound.wav',
+            './tmp/sound.wav',
             2,
             samp_rate,
             blocks.FORMAT_WAV,
