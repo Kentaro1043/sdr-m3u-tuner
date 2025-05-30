@@ -71,7 +71,7 @@ async def run_fm_reception():
     thread.daemon = True
     thread.start()
 
-    # フローグラフが開始されるまで待機
+    # Wait for the flow graph to start
     await asyncio.sleep(0.1)
     while not tb.flowgraph_started.is_set():
         await asyncio.sleep(0.1)
