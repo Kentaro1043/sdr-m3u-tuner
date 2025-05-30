@@ -9,9 +9,9 @@ options:
     description: ''
     gen_cmake: 'On'
     gen_linking: dynamic
-    generate_options: qt_gui
+    generate_options: no_gui
     hier_block_src_path: '.:'
-    id: fmrx
+    id: fm_reception
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -33,31 +33,6 @@ options:
     state: enabled
 
 blocks:
-- name: freq
-  id: qtgui_msgdigitalnumbercontrol
-  parameters:
-    ThousandsSeparator: ','
-    affinity: ''
-    alias: ''
-    comment: ''
-    gui_hint: ''
-    lbl: ''
-    maxFreqHz: 100e6
-    maxoutbuf: '0'
-    minFreqHz: 70e6
-    minoutbuf: '0'
-    outputmsgname: freq
-    readOnly: 'False'
-    relBackgroundColor: black
-    relFontColor: white
-    value: 80e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [336, 40.0]
-    rotation: 0
-    state: enabled
 - name: samp_rate
   id: variable
   parameters:
@@ -85,7 +60,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 164.0]
+    coordinate: [672, 296.0]
     rotation: 0
     state: enabled
 - name: blocks_wavfile_sink_0
@@ -107,7 +82,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [592, 160.0]
+    coordinate: [976, 232.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -131,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 156.0]
+    coordinate: [424, 240.0]
     rotation: 0
     state: enabled
 - name: osmosdr_source_0
@@ -309,7 +284,7 @@ blocks:
     dc_offset_mode7: '0'
     dc_offset_mode8: '0'
     dc_offset_mode9: '0'
-    freq0: ' freq'
+    freq0: 80M
     freq1: 100e6
     freq10: 100e6
     freq11: 100e6
@@ -488,14 +463,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 116.0]
+    coordinate: [72, 164.0]
     rotation: 0
     state: enabled
 
 connections:
 - [analog_wfm_rcv_pll_0, '0', blocks_wavfile_sink_0, '0']
 - [analog_wfm_rcv_pll_0, '1', blocks_wavfile_sink_0, '1']
-- [freq, valueout, freq, valuein]
 - [low_pass_filter_0, '0', analog_wfm_rcv_pll_0, '0']
 - [osmosdr_source_0, '0', low_pass_filter_0, '0']
 
