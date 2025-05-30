@@ -66,7 +66,7 @@ class fm_reception(gr.top_block):
                 window.WIN_HAMMING,
                 6.76))
         self.blocks_wavfile_sink_0 = blocks.wavfile_sink(
-            '/Users/kentaro/source/repos/github.com/Kentaro1043/sdr-m3u-tuner/test.wav',
+            '../tmp/output.wav',
             2,
             samp_rate,
             blocks.FORMAT_WAV,

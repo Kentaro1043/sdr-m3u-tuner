@@ -74,7 +74,7 @@ blocks:
     bits_per_sample3: FORMAT_VORBIS
     bits_per_sample4: FORMAT_PCM_16
     comment: ''
-    file: /Users/kentaro/source/repos/github.com/Kentaro1043/sdr-m3u-tuner/test.wav
+    file: ../tmp/output.wav
     format: FORMAT_WAV
     nchan: '2'
     samp_rate: samp_rate
