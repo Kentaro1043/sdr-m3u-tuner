@@ -62,6 +62,48 @@ blocks:
     bus_structure: null
     coordinate: [672, 296.0]
     rotation: 0
+    state: disabled
+- name: blocks_throttle2_0
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 456.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle2_1
+  id: blocks_throttle2
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 584.0]
+    rotation: 0
     state: enabled
 - name: blocks_wavfile_sink_0
   id: blocks_wavfile_sink
@@ -74,7 +116,7 @@ blocks:
     bits_per_sample3: FORMAT_VORBIS
     bits_per_sample4: FORMAT_PCM_16
     comment: ''
-    file: ../tmp/output.wav
+    file: ../tmp/sound.wav
     format: FORMAT_WAV
     nchan: '2'
     samp_rate: samp_rate
@@ -82,7 +124,25 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 232.0]
+    coordinate: [720, 472.0]
+    rotation: 0
+    state: enabled
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: ../tmp/test.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '2'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 504.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -108,7 +168,7 @@ blocks:
     bus_structure: null
     coordinate: [424, 240.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: osmosdr_source_0
   id: osmosdr_source
   parameters:
@@ -465,11 +525,13 @@ blocks:
     bus_structure: null
     coordinate: [72, 164.0]
     rotation: 0
-    state: enabled
+    state: disabled
 
 connections:
-- [analog_wfm_rcv_pll_0, '0', blocks_wavfile_sink_0, '0']
-- [analog_wfm_rcv_pll_0, '1', blocks_wavfile_sink_0, '1']
+- [blocks_throttle2_0, '0', blocks_wavfile_sink_0, '0']
+- [blocks_throttle2_1, '0', blocks_wavfile_sink_0, '1']
+- [blocks_wavfile_source_0, '0', blocks_throttle2_0, '0']
+- [blocks_wavfile_source_0, '1', blocks_throttle2_1, '0']
 - [low_pass_filter_0, '0', analog_wfm_rcv_pll_0, '0']
 - [osmosdr_source_0, '0', low_pass_filter_0, '0']
 
