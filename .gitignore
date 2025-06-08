@@ -265,3 +265,6 @@ $RECYCLE.BIN/
 
 # config file
 config.y*ml
+
+# WAV files
+*.wav
