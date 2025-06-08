@@ -43,7 +43,7 @@ class file_source(gr.top_block):
 
         self.zeromq_pub_sink_0 = zeromq.pub_sink(gr.sizeof_float, 1, pub_address, 100, False, (-1), '', True, True)
         self.blocks_wavfile_source_0 = blocks.wavfile_source(source_file_path, True)
-        self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_float*1, 48k, True, 0 if "auto" == "auto" else max( int(float(0.1) * 48k) if "auto" == "time" else int(0.1), 1) )
+        self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_float*1, 48000000, True, 0 if "auto" == "auto" else max( int(float(0.1) * 48000000) if "auto" == "time" else int(0.1), 1) )
 
 
         ##################################################

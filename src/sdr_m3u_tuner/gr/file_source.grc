@@ -68,7 +68,7 @@ blocks:
     maximum: '0.1'
     maxoutbuf: '0'
     minoutbuf: '0'
-    samples_per_second: 48k
+    samples_per_second: '48000000'
     type: float
     vlen: '1'
   states:
