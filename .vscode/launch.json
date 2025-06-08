@@ -5,7 +5,7 @@
       "name": "Debug Python Module",
       "type": "debugpy",
       "request": "launch",
-      "module": "src.sdr-m3u-tuner"
+      "module": "src.sdr_m3u_tuner"
     }
   ]
 }
