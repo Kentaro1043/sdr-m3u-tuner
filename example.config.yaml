@@ -1,4 +1,5 @@
 url: "https://example.com"
+port: 8080
 
 sources:
   # file source
