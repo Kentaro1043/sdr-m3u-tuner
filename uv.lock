@@ -396,7 +396,7 @@ requires-dist = [
     { name = "mypy", specifier = "==1.16.0" },
     { name = "numpy", specifier = "==2.2.6" },
     { name = "pyyaml", specifier = "==6.0.2" },
-    { name = "pyzmq", specifier = ">=26.4.0" },
+    { name = "pyzmq", specifier = "==26.4.0" },
     { name = "types-pyyaml", specifier = "==6.0.12.20250516" },
 ]
 
