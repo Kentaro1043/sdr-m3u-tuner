@@ -34,7 +34,7 @@ class file_source(gr.top_block):
         ##################################################
         # Variables
         ##################################################
-        self.source_file_path = source_file_path = "./test.wav"
+        self.source_file_path = source_file_path = "./audio .wav"
         self.pub_address_right = pub_address_right = "tcp://127.0.0.1:12345"
         self.pub_address_left = pub_address_left = "tcp://127.0.0.1:12345"
 

@@ -42,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 24.0]
+    coordinate: [256, 24.0]
     rotation: 0
     state: enabled
 - name: pub_address_right
@@ -54,14 +54,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 48.0]
+    coordinate: [376, 24.0]
     rotation: 0
     state: enabled
 - name: source_file_path
   id: variable
   parameters:
     comment: ''
-    value: '"./test.wav"'
+    value: '"./audio .wav"'
   states:
     bus_sink: false
     bus_source: false
