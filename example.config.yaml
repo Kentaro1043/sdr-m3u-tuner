@@ -12,6 +12,7 @@ sources:
     type: "fm"
     device: "hackrf=0"
     mid_frequency: 80000000
+    gain: 200
 
 outputs:
   # file
@@ -20,7 +21,11 @@ outputs:
   # FM
   - source: "source_fm_1"
     frequency: 80000000
+    cutoff_frequency: 2000000
+    squelch_threshold: 0.1
 
   # FM with different frequency
   - source: "source_fm_1"
     frequency: 82500000
+    cutoff_frequency: 2000000
+    squelch_threshold: 0.1
