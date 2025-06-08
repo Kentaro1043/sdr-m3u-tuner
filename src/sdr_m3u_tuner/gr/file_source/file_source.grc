@@ -37,31 +37,31 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '"tcp://127.0.0.1:12345"'
+    value: random_url.make_tcp_url()
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 24.0]
+    coordinate: [288, 24.0]
     rotation: 0
     state: enabled
 - name: pub_address_right
   id: variable
   parameters:
     comment: ''
-    value: '"tcp://127.0.0.1:12345"'
+    value: random_url.make_tcp_url()
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [376, 24.0]
+    coordinate: [416, 24.0]
     rotation: 0
     state: enabled
 - name: source_file_path
   id: variable
   parameters:
     comment: ''
-    value: '"./audio .wav"'
+    value: '"./audio.wav"'
   states:
     bus_sink: false
     bus_source: false
@@ -127,6 +127,19 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [48, 152.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import random_url
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 32.0]
     rotation: 0
     state: enabled
 - name: zeromq_pub_sink_0

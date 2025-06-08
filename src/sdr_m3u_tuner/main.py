@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 from loguru import logger
 
-from .gr.file_source import file_source
+from .gr.file_source.file_source import file_source
 
 
 def load_config(config_path: str) -> dict:
@@ -94,13 +94,15 @@ def is_port_available(port: int) -> bool:
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.bind(("127.0.0.1", port))
-            return True
+        return True
     except OSError:
         return False
 
 
 def find_available_port(
-    start_port: int = 49152, end_port: int = 65535, max_attempts: int = 100
+    start_port: int = 49152,
+    end_port: int = 65535,
+    max_attempts: int = 100,
 ) -> int:
     """Find an available port within the specified range.
 
@@ -115,6 +117,7 @@ def find_available_port(
     Raises:
         RuntimeError: If no available port is found after max_attempts
     """
+
     for _ in range(max_attempts):
         port = random.randint(start_port, end_port)
         if is_port_available(port):
@@ -126,29 +129,33 @@ def find_available_port(
 
 
 def init_file_source(source_file_path: str):
-    """Initialize file source with ZeroMQ distribution.
+    """Initialize file source with ZeroMQ distribution for stereo audio.
 
     Args:
         source_file_path: Path to the source audio file
 
     Returns:
-        tuple: (file_source_instance, pub_address)
+        tuple: (file_source_instance, pub_address_left, pub_address_right)
     """
-    # Find an available port for ZeroMQ (ephemeral port range: 49152-65535)
-    random_port = find_available_port()
-    pub_address = f"tcp://127.0.0.1:{random_port}"
+    # Find available ports for ZeroMQ (ephemeral port range: 49152-65535)
+    # Ensure left and right ports are different to avoid conflicts
+    left_port = find_available_port()
+    while True:
+        right_port = find_available_port()
+        if right_port != left_port:
+            break
 
-    logger.info(f"Initializing file source with file: {source_file_path}")
-    logger.debug(f"ZeroMQ publish address: {pub_address}")
+    pub_address_left = f"tcp://127.0.0.1:{left_port}"
+    pub_address_right = f"tcp://127.0.0.1:{right_port}"
 
-    # Create file source instance
+    logger.info(f"Initializing stereo file source with file: {source_file_path}")
+    logger.debug(f"ZeroMQ publish address (Left): {pub_address_left}")
+    logger.debug(f"ZeroMQ publish address (Right): {pub_address_right}")
+
+    # Create file source instance with correct addresses from the start
     fs_instance = file_source()
 
-    # Configure the source file path and pub address
-    fs_instance.set_source_file_path(source_file_path)
-    fs_instance.set_pub_address(pub_address)
-
-    return fs_instance, pub_address
+    return fs_instance, pub_address_left, pub_address_right
 
 
 def main():
@@ -174,16 +181,19 @@ def main():
                     logger.info(
                         f"Found file source: {source['id']} -> {source['file']}"
                     )
-                    fs_instance, pub_address = init_file_source(source["file"])
+                    fs_instance, pub_address_left, pub_address_right = init_file_source(
+                        source["file"]
+                    )
                     file_sources.append(
                         {
                             "id": source["id"],
                             "instance": fs_instance,
-                            "pub_address": pub_address,
+                            "pub_address_left": pub_address_left,
+                            "pub_address_right": pub_address_right,
                         }
                     )
                     logger.info(
-                        f"File source {source['id']} initialized with publish address: {pub_address}"
+                        f"File source {source['id']} initialized with stereo publish addresses: L={pub_address_left}, R={pub_address_right}"
                     )
 
             if file_sources:
