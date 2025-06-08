@@ -4,7 +4,7 @@ sources:
   # file source
   - id: "source_file_1"
     type: "file"
-    file: "./test.wav"
+    file: "~/test.wav"
 
   # FM source
   - id: "source_fm_1"
