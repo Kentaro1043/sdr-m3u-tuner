@@ -13,5 +13,5 @@ dependencies = [
 
 [tool.ruff]
 extend-exclude = [
-	"gnuradio/"
+    "**/gr/**"
 ]
