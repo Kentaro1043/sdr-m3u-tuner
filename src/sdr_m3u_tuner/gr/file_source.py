@@ -35,14 +35,17 @@ class file_source(gr.top_block):
         # Variables
         ##################################################
         self.source_file_path = source_file_path = "./test.wav"
-        self.pub_address = pub_address = "tcp://127.0.0.1:12345"
+        self.pub_address_right = pub_address_right = "tcp://127.0.0.1:12345"
+        self.pub_address_left = pub_address_left = "tcp://127.0.0.1:12345"
 
         ##################################################
         # Blocks
         ##################################################
 
-        self.zeromq_pub_sink_0 = zeromq.pub_sink(gr.sizeof_float, 1, pub_address, 100, False, (-1), '', True, True)
+        self.zeromq_pub_sink_0_0 = zeromq.pub_sink(gr.sizeof_float, 1, pub_address_right, 100, False, (-1), '', True, True)
+        self.zeromq_pub_sink_0 = zeromq.pub_sink(gr.sizeof_float, 1, pub_address_left, 100, False, (-1), '', True, True)
         self.blocks_wavfile_source_0 = blocks.wavfile_source(source_file_path, True)
+        self.blocks_throttle2_0_0 = blocks.throttle( gr.sizeof_float*1, 48000, True, 0 if "auto" == "auto" else max( int(float(0.1) * 48000) if "auto" == "time" else int(0.1), 1) )
         self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_float*1, 48000, True, 0 if "auto" == "auto" else max( int(float(0.1) * 48000) if "auto" == "time" else int(0.1), 1) )
 
 
@@ -50,7 +53,9 @@ class file_source(gr.top_block):
         # Connections
         ##################################################
         self.connect((self.blocks_throttle2_0, 0), (self.zeromq_pub_sink_0, 0))
+        self.connect((self.blocks_throttle2_0_0, 0), (self.zeromq_pub_sink_0_0, 0))
         self.connect((self.blocks_wavfile_source_0, 0), (self.blocks_throttle2_0, 0))
+        self.connect((self.blocks_wavfile_source_0, 1), (self.blocks_throttle2_0_0, 0))
 
 
     def get_source_file_path(self):
@@ -59,11 +64,17 @@ class file_source(gr.top_block):
     def set_source_file_path(self, source_file_path):
         self.source_file_path = source_file_path
 
-    def get_pub_address(self):
-        return self.pub_address
+    def get_pub_address_right(self):
+        return self.pub_address_right
 
-    def set_pub_address(self, pub_address):
-        self.pub_address = pub_address
+    def set_pub_address_right(self, pub_address_right):
+        self.pub_address_right = pub_address_right
+
+    def get_pub_address_left(self):
+        return self.pub_address_left
+
+    def set_pub_address_left(self, pub_address_left):
+        self.pub_address_left = pub_address_left
 
 
 
